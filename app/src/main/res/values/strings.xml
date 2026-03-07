@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">CapAI-XML</string>
+    <string name="select_image">Select Image</string>
+    <string name="no_image_selected">No Image selected. Select an image by\n tapping the button below.</string>
+    <string name="select_video">Select Video</string>
+    <string name="no_video_selected">No video selected.Please select a video\n by clicking the button below.</string>
+    <string name="generate_caption">Generate Caption</string>
+    <string name="short_captions_are_of_2_3_lines_per_platform">Short captions are of 2–3 lines per platform</string>
+    <string name="Long">Long</string>
+    <string name="Short">Short</string>
+    <string name="select_caption_length">Select Caption Length</string>
+    <string name="this_is_the_area_where_the_picture_will_show">This is the area where\nthe picture will show</string>
+    <string name="caption_preferences">Caption Preferences</string>
 </resources>
