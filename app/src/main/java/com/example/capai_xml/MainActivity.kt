@@ -21,6 +21,11 @@ class MainActivity : AppCompatActivity() {
         val selectImageScreenButton = findViewById<Button>(R.id.select_image_screen)
         val selectVideoScreenButton = findViewById<Button>(R.id.select_video_screen)
         val imageCaptionPreferencesScreenButton = findViewById<Button>(R.id.image_caption_preferences_screen)
+        val imageDetailsScreenButton = findViewById<Button>(R.id.caption_details_screen)
+        val captionTranslationBottomSheet = findViewById<Button>(R.id.translation_bottom_sheet)
+        val captionGeneratingScreen = findViewById<Button>(R.id.generating_caption_screen)
+        val autoCaptionScreen = findViewById<Button>(R.id.auto_caption_screen)
+
         selectImageScreenButton.setOnClickListener {
             val intent = Intent(this, SelectImageScreen::class.java)
             startActivity(intent)
@@ -31,6 +36,25 @@ class MainActivity : AppCompatActivity() {
         }
         imageCaptionPreferencesScreenButton.setOnClickListener {
             val intent = Intent(this, ImageCaptionPreferencesScreen::class.java)
+            startActivity(intent)
+        }
+        imageDetailsScreenButton.setOnClickListener {
+            val intent = Intent(this, ImageDetailsScreen::class.java)
+            startActivity(intent)
+        }
+
+        captionTranslationBottomSheet.setOnClickListener {
+            val intent = Intent(this, BottomSheetCaptionTranslation::class.java)
+            startActivity(intent)
+        }
+
+        captionGeneratingScreen.setOnClickListener {
+            val intent = Intent(this, GeneratingCaptionScreen::class.java)
+            startActivity(intent)
+        }
+
+        autoCaptionScreen.setOnClickListener {
+            val intent = Intent(this, AutoCaptionScreen::class.java)
             startActivity(intent)
         }
     }

@@ -25,9 +25,37 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Caption Details Screen"
+        android:layout_margin="15dp"
+        android:id="@+id/caption_details_screen"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Select Video Screen"
         android:layout_margin="15dp"
         android:id="@+id/select_video_screen"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Caption Translation Bottom Sheet"
+        android:layout_margin="15dp"
+        android:id="@+id/translation_bottom_sheet"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Generating Caption Screen"
+        android:layout_margin="15dp"
+        android:id="@+id/generating_caption_screen"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Auto Caption Screen"
+        android:layout_margin="15dp"
+        android:id="@+id/auto_caption_screen"/>
 
 
 </LinearLayout>

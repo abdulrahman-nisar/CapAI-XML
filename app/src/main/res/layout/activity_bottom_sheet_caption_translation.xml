@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/bg_bottom_sheet"
+    tools:context=".BottomSheetCaptionTranslation">
+
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_drag_handle" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/caption_translation"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:text="@string/select_translation_language"
+        android:textColor="#80FFFFFF"
+        android:textSize="14sp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flowLanguages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:flow_wrapMode="chain"
+            app:flow_horizontalStyle="packed"
+            app:flow_horizontalGap="8dp"
+            app:flow_verticalGap="10dp"
+            app:flow_horizontalAlign="start"
+            app:constraint_referenced_ids="chipEnglish,chipUrdu,chipArabic,chipSpanish,chipFrench,chipGerman,chipChinese,chipHindi,chipTurkish,chipPortuguese" />
+
+
+        <TextView
+            android:id="@+id/chipEnglish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chip_selected"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="10dp"
+            android:text="🇬🇧  English"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/chipUrdu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chip_unselected"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="10dp"
+            android:text="🇵🇰  Urdu"
+            android:textColor="#B0FFFFFF"
+            android:textSize="13sp" />
+
+
+        <TextView
+            android:id="@+id/chipArabic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chip_unselected"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="10dp"
+            android:text="🇸🇦  Arabic"
+            android:textColor="#B0FFFFFF"
+            android:textSize="13sp" />
+
+
+        <TextView
+            android:id="@+id/chipSpanish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chip_unselected"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="10dp"
+            android:text="🇪🇸  Spanish"
+            android:textColor="#B0FFFFFF"
+            android:textSize="13sp" />
+
+
+        <TextView
+            android:id="@+id/chipFrench"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chip_unselected"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="10dp"
+            android:text="🇫🇷  French"
+            android:textColor="#B0FFFFFF"
+            android:textSize="13sp" />
+
+
+        <TextView
+            android:id="@+id/chipGerman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chip_unselected"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="10dp"
+            android:text="🇩🇪  German"
+            android:textColor="#B0FFFFFF"
+            android:textSize="13sp" />
+
+
+        <TextView
+            android:id="@+id/chipChinese"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chip_unselected"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="10dp"
+            android:text="🇨🇳  Chinese"
+            android:textColor="#B0FFFFFF"
+            android:textSize="13sp" />
+
+
+        <TextView
+            android:id="@+id/chipHindi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chip_unselected"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="10dp"
+            android:text="🇮🇳  Hindi"
+            android:textColor="#B0FFFFFF"
+            android:textSize="13sp" />
+
+
+        <TextView
+            android:id="@+id/chipTurkish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chip_unselected"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="10dp"
+            android:text="🇹🇷  Turkish"
+            android:textColor="#B0FFFFFF"
+            android:textSize="13sp" />
+
+
+        <TextView
+            android:id="@+id/chipPortuguese"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chip_unselected"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="10dp"
+            android:text="🇧🇷  Portuguese"
+            android:textColor="#B0FFFFFF"
+            android:textSize="13sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnGenerateCaption"
+        android:layout_width="250dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="center"
+        android:backgroundTint="#2563EB"
+        android:text="Generate Caption  →"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:cornerRadius="16dp" />
+
+</LinearLayout>

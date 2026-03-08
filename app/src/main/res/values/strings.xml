@@ -11,4 +11,11 @@
     <string name="select_caption_length">Select Caption Length</string>
     <string name="this_is_the_area_where_the_picture_will_show">This is the area where\nthe picture will show</string>
     <string name="caption_preferences">Caption Preferences</string>
+    <string name="generated_captions">Generated Captions</string>
+    <string name="instagram">Instagram</string>
+    <string name="instagram_caption">Golden hour vibes hitting different today. Nature\'s masterpiece painted across the sky, reminding us to pause and appreciate the beauty around us.\n\nSometimes the best moments are the ones where you just stop and stare. \n\n#GoldenHour #SunsetVibes #NaturePhotography #BeautifulSky #PeacefulMoments #SunsetLovers</string>
+    <string name="copy">Copy</string>
+    <string name="share">Share</string>
+    <string name="caption_translation">Caption Translation</string>
+    <string name="select_translation_language">Select Translation Language</string>
 </resources>
