@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="FabRounded">
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="NavMenuText" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">15sp</item>
+    </style>
+</resources>

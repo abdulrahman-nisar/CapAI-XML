@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val homeScreenButton = findViewById<Button>(R.id.home_screen)
         val selectImageScreenButton = findViewById<Button>(R.id.select_image_screen)
         val selectVideoScreenButton = findViewById<Button>(R.id.select_video_screen)
         val imageCaptionPreferencesScreenButton = findViewById<Button>(R.id.image_caption_preferences_screen)
@@ -26,6 +27,11 @@ class MainActivity : AppCompatActivity() {
         val captionGeneratingScreen = findViewById<Button>(R.id.generating_caption_screen)
         val autoCaptionScreen = findViewById<Button>(R.id.auto_caption_screen)
         val editCaptionScreen = findViewById<Button>(R.id.edit_caption_screen)
+
+        homeScreenButton.setOnClickListener {
+            val intent = Intent(this, HomeScreen::class.java)
+            startActivity(intent)
+        }
 
         selectImageScreenButton.setOnClickListener {
             val intent = Intent(this, SelectImageScreen::class.java)

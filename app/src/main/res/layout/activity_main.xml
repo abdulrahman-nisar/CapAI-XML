@@ -12,6 +12,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Home Screen"
+        android:layout_margin="15dp"
+        android:id="@+id/home_screen"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Select Image Screen"
         android:layout_margin="15dp"
         android:id="@+id/select_image_screen"/>
