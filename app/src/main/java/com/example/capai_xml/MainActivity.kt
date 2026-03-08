@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         val captionTranslationBottomSheet = findViewById<Button>(R.id.translation_bottom_sheet)
         val captionGeneratingScreen = findViewById<Button>(R.id.generating_caption_screen)
         val autoCaptionScreen = findViewById<Button>(R.id.auto_caption_screen)
+        val editCaptionScreen = findViewById<Button>(R.id.edit_caption_screen)
 
         selectImageScreenButton.setOnClickListener {
             val intent = Intent(this, SelectImageScreen::class.java)
@@ -55,6 +56,11 @@ class MainActivity : AppCompatActivity() {
 
         autoCaptionScreen.setOnClickListener {
             val intent = Intent(this, AutoCaptionScreen::class.java)
+            startActivity(intent)
+        }
+
+        editCaptionScreen.setOnClickListener {
+            val intent = Intent(this, EditCaptionScreen::class.java)
             startActivity(intent)
         }
     }

@@ -57,5 +57,12 @@
         android:layout_margin="15dp"
         android:id="@+id/auto_caption_screen"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Caption Screen"
+        android:layout_margin="15dp"
+        android:id="@+id/edit_caption_screen"/>
+
 
 </LinearLayout>
