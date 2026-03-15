@@ -44,11 +44,11 @@
         android:id="@+id/select_video_screen"/>
 
     <Button
+        android:id="@+id/translation_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Caption Translation Bottom Sheet"
         android:layout_margin="15dp"
-        android:id="@+id/translation_bottom_sheet"/>
+        android:text="Caption Translation Bottom Sheet" />
 
     <Button
         android:layout_width="match_parent"
