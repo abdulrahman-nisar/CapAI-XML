@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CapAIXML">
         <activity
+            android:name=".LandingScreen"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpScreen"
+            android:exported="false" />
+        <activity
+            android:name=".LoginScreen"
+            android:exported="false" />
+        <activity
             android:name=".HomeScreen"
             android:exported="false" />
         <activity

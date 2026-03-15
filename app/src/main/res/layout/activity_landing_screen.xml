@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_app_gradient"
-    tools:context=".SplashScreen">
+    tools:context=".LandingScreen">
 
-    <!-- Logo / Brand Name Placeholder -->
     <LinearLayout
         android:id="@+id/llLogo"
         android:layout_width="wrap_content"

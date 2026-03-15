@@ -9,7 +9,7 @@
                 android:angle="225" />
         </shape>
     </item>
-    <!-- Inner camera icon shape -->
+
     <item
         android:top="10dp"
         android:bottom="10dp"
@@ -22,7 +22,7 @@
             <corners android:radius="4dp" />
         </shape>
     </item>
-    <!-- Lens circle -->
+
     <item
         android:top="14dp"
         android:bottom="14dp"

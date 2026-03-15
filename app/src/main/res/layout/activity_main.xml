@@ -12,6 +12,27 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Landing Screen"
+        android:layout_margin="15dp"
+        android:id="@+id/landing_screen"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign Up Screen"
+        android:layout_margin="15dp"
+        android:id="@+id/signup_screen"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login Screen"
+        android:layout_margin="15dp"
+        android:id="@+id/login_screen"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Home Screen"
         android:layout_margin="15dp"
         android:id="@+id/home_screen"/>

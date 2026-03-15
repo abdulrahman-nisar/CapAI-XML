@@ -409,16 +409,4 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-<!--    <com.google.android.material.navigation.NavigationView-->
-<!--        android:id="@+id/navView"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_gravity="start"-->
-<!--        android:background="#1A1A2E"-->
-<!--        app:headerLayout="@layout/nav_header"-->
-<!--        app:menu="@menu/nav_menu"-->
-<!--        app:itemTextColor="@color/white"-->
-<!--        app:itemIconTint="@color/white"-->
-<!--        app:itemTextAppearance="@style/NavMenuText" />-->
-
 </androidx.drawerlayout.widget.DrawerLayout>
