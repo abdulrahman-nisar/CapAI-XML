@@ -18,4 +18,10 @@
     <string name="share">Share</string>
     <string name="caption_translation">Caption Translation</string>
     <string name="select_translation_language">Select Translation Language</string>
+    <string name="capai">CapAI</string>
+    <string name="add_new_item">Add New Item</string>
+    <string name="add_image">Add Image</string>
+    <string name="add_video">Add Video</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

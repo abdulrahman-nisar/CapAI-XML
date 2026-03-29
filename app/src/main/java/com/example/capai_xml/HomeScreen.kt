@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 class HomeScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,6 +16,12 @@ class HomeScreen : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val fabButton = findViewById<ExtendedFloatingActionButton>(R.id.fabNew)
+        fabButton.setOnClickListener {
+            val bottomSheet = HomeNewButtonBottomSheet()
+            bottomSheet.show(supportFragmentManager, "HomeNewButtonBottomSheet")
         }
     }
 }

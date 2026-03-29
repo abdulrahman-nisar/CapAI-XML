@@ -1,6 +1,8 @@
 package com.example.capai_xml
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,6 +17,12 @@ class ImageCaptionPreferencesScreen : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val generateButton = findViewById<Button>(R.id.btnGenerate)
+        generateButton.setOnClickListener {
+            val intent = Intent(this, ImageDetailsScreen::class.java)
+            startActivity(intent)
         }
     }
 }

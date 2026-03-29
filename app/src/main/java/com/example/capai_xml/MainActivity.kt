@@ -18,5 +18,11 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val getStartedButton = findViewById<Button>(R.id.btnGetStarted)
+        getStartedButton.setOnClickListener {
+            val intent = Intent(this, LoginScreen::class.java)
+            startActivity(intent)
+        }
     }
 }

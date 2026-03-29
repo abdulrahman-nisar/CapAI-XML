@@ -1,6 +1,8 @@
 package com.example.capai_xml
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,5 +18,11 @@ class SelectImageScreen : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val selectImageScreenButton = findViewById<Button>(R.id.selectImageButton)
+        selectImageScreenButton.setOnClickListener {
+            val intent = Intent(this, ImageCaptionPreferencesScreen::class.java)
+            startActivity(intent)
+        }
+
     }
 }
