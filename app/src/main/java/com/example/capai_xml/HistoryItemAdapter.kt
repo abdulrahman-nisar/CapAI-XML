@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 
 class HistoryItemAdapter(
     private val historyItems: List<HistoryListItem>
@@ -12,6 +14,7 @@ class HistoryItemAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val name : TextView = view.findViewById<TextView>(R.id.name)
         val date : TextView = view.findViewById<TextView>(R.id.date)
+        val cardView : MaterialCardView = view.findViewById<MaterialCardView>(R.id.itemCardView)
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {

@@ -40,9 +40,6 @@
             android:name=".GeneratingCaptionScreen"
             android:exported="false" />
         <activity
-            android:name=".BottomSheetCaptionTranslation"
-            android:exported="false" />
-        <activity
             android:name=".ImageDetailsScreen"
             android:exported="false" />
         <activity

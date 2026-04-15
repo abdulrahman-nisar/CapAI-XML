@@ -31,6 +31,10 @@ class HomeScreen : AppCompatActivity() {
             HistoryListItem("Sun Set", " 29/03/2026"),
             HistoryListItem("BirthDay Video", " 29/03/2026"),
             HistoryListItem("Movie", " 29/03/2026"),
+            HistoryListItem("Movie", " 29/03/2026"),
+            HistoryListItem("Movie", " 29/03/2026"),
+            HistoryListItem("Movie", " 29/03/2026"),
+
         )
 
         recyclerView.layoutManager = LinearLayoutManager(this)

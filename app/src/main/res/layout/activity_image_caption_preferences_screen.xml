@@ -10,7 +10,7 @@
     tools:context=".ImageCaptionPreferencesScreen">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarCaptionPreferences"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primary"
@@ -70,21 +70,10 @@
             android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:rowCount="1"
-                android:useDefaultMargins="false"
-                android:alignmentMode="alignMargins">
-
                 <RadioButton
+                    android:layout_weight="1"
                     android:id="@+id/rbShort"
-                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:layout_row="0"
-                    android:layout_columnWeight="1"
                     android:layout_marginEnd="12dp"
                     android:checked="true"
                     android:button="@android:color/transparent"
@@ -95,15 +84,13 @@
                     android:text="@string/Short"
                     android:textColor="@color/radio_caption_text_selector"
                     android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_width="0dp"/>
 
                 <RadioButton
+                    android:layout_weight="1"
                     android:id="@+id/rbLong"
-                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:layout_row="0"
-                    android:layout_columnWeight="1"
                     android:button="@android:color/transparent"
                     android:background="@drawable/bg_radio_caption_selector"
                     android:gravity="center"
@@ -112,9 +99,9 @@
                     android:text="@string/Long"
                     android:textColor="@color/radio_caption_text_selector"
                     android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_width="0dp"/>
 
-            </GridLayout>
 
         </RadioGroup>
 

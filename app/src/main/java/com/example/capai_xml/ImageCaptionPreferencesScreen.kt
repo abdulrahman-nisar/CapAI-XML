@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -20,9 +21,18 @@ class ImageCaptionPreferencesScreen : AppCompatActivity() {
         }
 
         val generateButton = findViewById<Button>(R.id.btnGenerate)
+        val toolbarImageCaptionPreferences = findViewById<Toolbar>(R.id.toolbarCaptionPreferences)
+
         generateButton.setOnClickListener {
             val intent = Intent(this, ImageDetailsScreen::class.java)
             startActivity(intent)
+        }
+
+        toolbarImageCaptionPreferences.setNavigationOnClickListener {
+            Intent(this, HomeScreen::class.java).also {
+                it.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(it)
+            }
         }
     }
 }

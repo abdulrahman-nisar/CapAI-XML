@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -19,10 +20,16 @@ class SelectVideoScreen : AppCompatActivity() {
             insets
         }
 
-        val selectImageButton = findViewById<Button>(R.id.selectVideoButton)
-        selectImageButton.setOnClickListener {
+        val selectVideoButton = findViewById<Button>(R.id.selectVideoButton)
+        val toolbarSelectVideo = findViewById<Toolbar>(R.id.toolbarSelectVideo)
+
+        selectVideoButton.setOnClickListener {
             val bottomSheet = CaptionTranslationBottomSheet()
             bottomSheet.show(supportFragmentManager, "AIOptionsBottomSheet")
+        }
+
+        toolbarSelectVideo.setNavigationOnClickListener {
+            finish()
         }
     }
 }
