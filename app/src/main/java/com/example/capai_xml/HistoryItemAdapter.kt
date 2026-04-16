@@ -1,36 +1,59 @@
 package com.example.capai_xml
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 
-class HistoryItemAdapter(
-    private val historyItems: List<HistoryListItem>
-) : RecyclerView.Adapter<HistoryItemAdapter.ViewHolder>(){
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val name : TextView = view.findViewById<TextView>(R.id.name)
-        val date : TextView = view.findViewById<TextView>(R.id.date)
-        val cardView : MaterialCardView = view.findViewById<MaterialCardView>(R.id.itemCardView)
+class HistoryItemAdapter(items: List<HistoryListItem>) :
+    RecyclerView.Adapter<HistoryItemAdapter.ViewHolder>() {
+
+    private val allItems: MutableList<HistoryListItem> = items.toMutableList()
+
+    private val visibleItems: MutableList<HistoryListItem> = items.toMutableList()
+
+    private var currentQuery: String = ""
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val name: TextView = view.findViewById(R.id.name)
+        val date: TextView = view.findViewById(R.id.date)
     }
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
-        val view = LayoutInflater.from(p0.context)
-            .inflate(R.layout.historyitem, p0, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.historyitem, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        val item = historyItems[p1]
-        p0.name.text = item.name
-        p0.date.text = item.date
-
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = visibleItems[position]
+        holder.name.text = item.name
+        holder.date.text = item.date
     }
 
-    override fun getItemCount(): Int {
-        return historyItems.size
+    override fun getItemCount(): Int = visibleItems.size
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun search(query: String) {
+        currentQuery = query
+
+        val q = query.trim()
+        val filtered = if (q.isBlank()) {
+            allItems
+        } else {
+            allItems.filter {
+                it.name.contains(q, ignoreCase = true) ||
+                    it.date.contains(q, ignoreCase = true)
+            }
+        }
+
+        visibleItems.clear()
+        visibleItems.addAll(filtered)
+        notifyDataSetChanged()
     }
+
 }
+
+
