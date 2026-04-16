@@ -3,6 +3,8 @@ package com.example.capai_xml
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.MediaController
+import android.widget.VideoView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -21,7 +23,13 @@ class EditCaptionScreen : AppCompatActivity() {
 
         val backButtonImage = findViewById<ImageView>(R.id.ivBack)
         val saveButtonImage = findViewById<ImageView>(R.id.ivSave)
-
+        val videoView = findViewById<VideoView>(R.id.editCaptionVideoView)
+        val uri = intent.getStringExtra("videoUri")
+        videoView.setVideoPath(uri)
+        val mediaController = MediaController(this)
+        mediaController.setAnchorView(videoView)
+        videoView.setMediaController(mediaController)
+        videoView.start()
 
         backButtonImage.setOnClickListener {
             finish()

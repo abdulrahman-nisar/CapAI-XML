@@ -17,7 +17,10 @@ class GeneratingCaptionScreen : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val uri = intent.getStringExtra("videoUri")
         val intent = Intent(this, AutoCaptionScreen::class.java)
+        intent.putExtra("videoUri", uri)
         startActivity(intent)
     }
 }

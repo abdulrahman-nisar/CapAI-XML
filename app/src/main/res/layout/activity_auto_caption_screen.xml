@@ -61,30 +61,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <View
+            <VideoView
+                android:id="@+id/autoCaptionVideoView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#0D0D1A" />
-
-            <FrameLayout
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center">
-
-                <View
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@drawable/bg_play_button" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_play"
-                    app:tint="@color/white"
-                    android:contentDescription="Play" />
-
-            </FrameLayout>
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:layout_width="match_parent"

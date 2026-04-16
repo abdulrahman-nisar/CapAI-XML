@@ -46,14 +46,12 @@
                 app:cardCornerRadius="20dp"
                 app:cardElevation="4dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/this_is_the_area_where_the_picture_will_show"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                <ImageView
+                    android:id="@+id/ivDetailedSelectedImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Selected image"
+                    android:scaleType="centerCrop" />
 
             </com.google.android.material.card.MaterialCardView>
 

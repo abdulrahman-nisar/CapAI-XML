@@ -57,44 +57,13 @@
         app:cardElevation="4dp"
         app:cardBackgroundColor="#0D0D1A">
 
-        <FrameLayout
+        <VideoView
+            android:id="@+id/editCaptionVideoView"
+
+            android:padding="0dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#1A1A2E" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Video Preview\nArea"
-                android:textColor="#40FFFFFF"
-                android:textSize="16sp" />
-
-            <FrameLayout
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center">
-
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/bg_play_button" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_play"
-                    app:tint="@color/white"
-                    android:contentDescription="Pause" />
-
-            </FrameLayout>
-        </FrameLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <HorizontalScrollView
