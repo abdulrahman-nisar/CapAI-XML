@@ -33,8 +33,9 @@ class HomeScreen : AppCompatActivity() {
             insets
         }
 
-        etSearch = findViewById(R.id.etSearch)
+
         recyclerView = findViewById(R.id.recyclerView)
+        etSearch = findViewById(R.id.etSearch)
 
         historyItems = listOf(
             HistoryListItem("Sun Set", "29/03/2026"),
