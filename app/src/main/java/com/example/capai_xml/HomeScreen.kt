@@ -36,6 +36,7 @@ class HomeScreen : AppCompatActivity() {
         etSearch = findViewById(R.id.etSearch)
         recyclerView = findViewById(R.id.recyclerView)
 
+
         historyItems = listOf(
             HistoryListItem("Sun Set", "29/03/2026"),
             HistoryListItem("BirthDay Video", "29/03/2026"),
