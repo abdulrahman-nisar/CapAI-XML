@@ -1,9 +1,11 @@
 package com.example.capai_xml
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
@@ -23,9 +25,18 @@ class SelectVideoScreen : AppCompatActivity() {
         val selectVideoButton = findViewById<Button>(R.id.selectVideoButton)
         val toolbarSelectVideo = findViewById<Toolbar>(R.id.toolbarSelectVideo)
 
+        val pickVideoLauncher = registerForActivityResult(
+            ActivityResultContracts.GetContent()
+        ) { uri: Uri? ->
+            uri?.let {
+                val bottomSheet = CaptionTranslationBottomSheet.newInstance(it.toString())
+                bottomSheet.show(supportFragmentManager, "AIOptionsBottomSheet")
+
+            }
+        }
+
         selectVideoButton.setOnClickListener {
-            val bottomSheet = CaptionTranslationBottomSheet()
-            bottomSheet.show(supportFragmentManager, "AIOptionsBottomSheet")
+            pickVideoLauncher.launch("video/*")
         }
 
         toolbarSelectVideo.setNavigationOnClickListener {

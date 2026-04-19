@@ -15,6 +15,18 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class CaptionTranslationBottomSheet : BottomSheetDialogFragment() {
 
+    companion object{
+        private const val ARG_VIDEO_URI = "videoUri"
+        fun newInstance(videoUri: String): CaptionTranslationBottomSheet {
+            val args = Bundle().apply {
+                putString(ARG_VIDEO_URI, videoUri)
+            }
+            return CaptionTranslationBottomSheet().apply {
+                arguments = args
+            }
+        }
+    }
+
     private var selectedChipId: Int = R.id.chipEnglish
     private var selectedLanguageText: String = "English"
 
@@ -46,18 +58,10 @@ class CaptionTranslationBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val pickVideoLauncher = registerForActivityResult(
-            ActivityResultContracts.GetContent()
-        ) { uri: Uri? ->
-            uri?.let {
-                val intent = Intent(view.context, GeneratingCaptionScreen::class.java)
-                intent.putExtra("videoUri", it.toString())
-                startActivity(intent)
-                dismiss()
-            }
-        }
+
 
         val chipIds = chipLanguageMap.keys
+        val videoUri = arguments?.getString(ARG_VIDEO_URI)
         chipIds.forEach { chipId ->
             view.findViewById<TextView>(chipId).setOnClickListener {
                 selectLanguage(view, chipId)
@@ -68,7 +72,10 @@ class CaptionTranslationBottomSheet : BottomSheetDialogFragment() {
 
         val generateCaptionButton = view.findViewById<Button>(R.id.btnGenerateCaption)
         generateCaptionButton.setOnClickListener {
-            pickVideoLauncher.launch("video/*")
+                val intent = Intent(view.context, GeneratingCaptionScreen::class.java)
+                intent.putExtra("videoUri", videoUri)
+                startActivity(intent)
+                dismiss()
         }
     }
 
