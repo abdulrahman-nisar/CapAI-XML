@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_app_gradient"
     android:padding="32dp"
-    tools:context=".SignUpScreen">
+    tools:context=".activities.SignUpScreen">
 
     <TextView
         android:id="@+id/tvSignUpTitle"

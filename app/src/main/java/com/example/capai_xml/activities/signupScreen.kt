@@ -1,9 +1,10 @@
-package com.example.capai_xml
+package com.example.capai_xml.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.capai_xml.R
 
 class SignUpScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

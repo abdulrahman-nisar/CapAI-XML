@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/black"
-    tools:context=".EditCaptionScreen">
+    tools:context=".activities.EditCaptionScreen">
 
     <RelativeLayout
         android:layout_width="match_parent"

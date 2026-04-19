@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CapAIXML">
         <activity
-            android:name=".Splash"
+            android:name=".activities.Splash"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -22,37 +22,37 @@
         </activity>
 
         <activity
-            android:name=".SignUpScreen"
+            android:name=".activities.SignUpScreen"
             android:exported="false" />
         <activity
-            android:name=".LoginScreen"
+            android:name=".activities.LoginScreen"
             android:exported="false" />
         <activity
-            android:name=".HomeScreen"
+            android:name=".activities.HomeScreen"
             android:exported="false" />
         <activity
-            android:name=".EditCaptionScreen"
+            android:name=".activities.EditCaptionScreen"
             android:exported="false" />
         <activity
-            android:name=".AutoCaptionScreen"
+            android:name=".activities.AutoCaptionScreen"
             android:exported="false" />
         <activity
-            android:name=".GeneratingCaptionScreen"
+            android:name=".activities.GeneratingCaptionScreen"
             android:exported="false" />
         <activity
-            android:name=".ImageDetailsScreen"
+            android:name=".activities.ImageDetailsScreen"
             android:exported="false" />
         <activity
-            android:name=".ImageCaptionPreferencesScreen"
+            android:name=".activities.ImageCaptionPreferencesScreen"
             android:exported="false" />
         <activity
-            android:name=".SelectVideoScreen"
+            android:name=".activities.SelectVideoScreen"
             android:exported="false" />
         <activity
-            android:name=".SelectImageScreen"
+            android:name=".activities.SelectImageScreen"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true"/>
 
     </application>

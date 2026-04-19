@@ -1,6 +1,5 @@
-package com.example.capai_xml
+package com.example.capai_xml.activities
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
@@ -10,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.capai_xml.R
+import com.example.capai_xml.fragements.CaptionTranslationBottomSheet
 
 class SelectVideoScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +30,7 @@ class SelectVideoScreen : AppCompatActivity() {
             ActivityResultContracts.GetContent()
         ) { uri: Uri? ->
             uri?.let {
-                val bottomSheet = CaptionTranslationBottomSheet.newInstance(it.toString())
+                val bottomSheet = CaptionTranslationBottomSheet.Companion.newInstance(it.toString())
                 bottomSheet.show(supportFragmentManager, "AIOptionsBottomSheet")
 
             }

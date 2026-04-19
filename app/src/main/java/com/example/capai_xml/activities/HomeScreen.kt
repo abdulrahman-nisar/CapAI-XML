@@ -1,6 +1,5 @@
-package com.example.capai_xml
+package com.example.capai_xml.activities
 
-import android.content.Context
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
@@ -11,6 +10,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.capai_xml.activities.HistoryListItem
+import com.example.capai_xml.fragements.HomeNewButtonBottomSheet
+import com.example.capai_xml.R
+import com.example.capai_xml.adapter.HistoryItemAdapter
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 
@@ -63,7 +66,7 @@ class HomeScreen : AppCompatActivity() {
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         currentFocus?.let { view ->
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
             view.clearFocus()
         }
