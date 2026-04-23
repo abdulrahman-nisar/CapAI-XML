@@ -1,4 +1,4 @@
-package com.example.capai_xml.activities
+package com.example.capai_xml.ui.activities
 
 import android.content.Intent
 import android.os.Bundle

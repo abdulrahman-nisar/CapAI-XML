@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CapAIXML">
         <activity
-            android:name=".activities.Splash"
+            android:name=".ui.activities.Splash"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -22,37 +22,37 @@
         </activity>
 
         <activity
-            android:name=".activities.SignUpScreen"
+            android:name=".ui.activities.SignUpScreen"
             android:exported="false" />
         <activity
-            android:name=".activities.LoginScreen"
+            android:name=".ui.activities.LoginScreen"
             android:exported="false" />
         <activity
-            android:name=".activities.HomeScreen"
+            android:name=".ui.activities.HomeScreen"
             android:exported="false" />
         <activity
-            android:name=".activities.EditCaptionScreen"
+            android:name=".ui.activities.EditCaptionScreen"
             android:exported="false" />
         <activity
-            android:name=".activities.AutoCaptionScreen"
+            android:name=".ui.activities.AutoCaptionScreen"
             android:exported="false" />
         <activity
-            android:name=".activities.GeneratingCaptionScreen"
+            android:name=".ui.activities.GeneratingCaptionScreen"
             android:exported="false" />
         <activity
-            android:name=".activities.ImageDetailsScreen"
+            android:name=".ui.activities.ImageDetailsScreen"
             android:exported="false" />
         <activity
-            android:name=".activities.ImageCaptionPreferencesScreen"
+            android:name=".ui.activities.ImageCaptionPreferencesScreen"
             android:exported="false" />
         <activity
-            android:name=".activities.SelectVideoScreen"
+            android:name=".ui.activities.SelectVideoScreen"
             android:exported="false" />
         <activity
-            android:name=".activities.SelectImageScreen"
+            android:name=".ui.activities.SelectImageScreen"
             android:exported="false" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="true"/>
 
     </application>

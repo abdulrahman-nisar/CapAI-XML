@@ -1,4 +1,4 @@
-package com.example.capai_xml.activities
+package com.example.capai_xml.ui.activities
 
 import android.os.Bundle
 import android.widget.ImageView

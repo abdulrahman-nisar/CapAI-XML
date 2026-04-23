@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:background="@color/black"
     android:gravity="center_horizontal"
-    tools:context=".activities.GeneratingCaptionScreen">
+    tools:context=".ui.activities.GeneratingCaptionScreen">
 
     <View
         android:layout_width="match_parent"

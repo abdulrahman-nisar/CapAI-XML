@@ -1,4 +1,4 @@
-package com.example.capai_xml.activities
+package com.example.capai_xml.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,8 +10,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.capai_xml.activities.EditCaptionScreen
-import com.example.capai_xml.activities.HomeScreen
 import com.example.capai_xml.R
 
 class AutoCaptionScreen : AppCompatActivity() {

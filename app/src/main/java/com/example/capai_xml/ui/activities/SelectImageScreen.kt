@@ -1,4 +1,4 @@
-package com.example.capai_xml.activities
+package com.example.capai_xml.ui.activities
 
 import android.content.Intent
 import android.net.Uri
@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.capai_xml.activities.ImageCaptionPreferencesScreen
 import com.example.capai_xml.R
 
 class SelectImageScreen : AppCompatActivity() {

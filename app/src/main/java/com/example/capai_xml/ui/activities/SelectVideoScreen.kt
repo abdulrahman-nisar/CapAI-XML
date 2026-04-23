@@ -1,4 +1,4 @@
-package com.example.capai_xml.activities
+package com.example.capai_xml.ui.activities
 
 import android.net.Uri
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.capai_xml.R
-import com.example.capai_xml.fragements.CaptionTranslationBottomSheet
+import com.example.capai_xml.ui.fragements.CaptionTranslationBottomSheet
 
 class SelectVideoScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.example.capai_xml.fragements
+package com.example.capai_xml.ui.fragements
 
 import android.content.Intent
 import android.graphics.Color
@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.example.capai_xml.R
-import com.example.capai_xml.activities.GeneratingCaptionScreen
+import com.example.capai_xml.ui.activities.GeneratingCaptionScreen
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class CaptionTranslationBottomSheet : BottomSheetDialogFragment() {

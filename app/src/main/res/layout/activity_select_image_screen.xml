@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:orientation="vertical"
-    tools:context=".activities.SelectImageScreen">
+    tools:context=".ui.activities.SelectImageScreen">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarSelectImage"

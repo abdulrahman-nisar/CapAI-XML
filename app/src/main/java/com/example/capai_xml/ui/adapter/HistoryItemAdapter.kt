@@ -1,4 +1,4 @@
-package com.example.capai_xml.adapter
+package com.example.capai_xml.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.capai_xml.activities.HistoryListItem
 import com.example.capai_xml.R
+import com.example.capai_xml.ui.activities.HistoryListItem
 
 class HistoryItemAdapter(items: List<HistoryListItem>) :
     RecyclerView.Adapter<HistoryItemAdapter.ViewHolder>() {

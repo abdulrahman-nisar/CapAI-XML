@@ -1,4 +1,4 @@
-package com.example.capai_xml.activities
+package com.example.capai_xml.ui.activities
 
 import android.os.Bundle
 import android.view.MotionEvent
@@ -10,10 +10,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.capai_xml.activities.HistoryListItem
-import com.example.capai_xml.fragements.HomeNewButtonBottomSheet
+import com.example.capai_xml.ui.fragements.HomeNewButtonBottomSheet
 import com.example.capai_xml.R
-import com.example.capai_xml.adapter.HistoryItemAdapter
+import com.example.capai_xml.ui.adapter.HistoryItemAdapter
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 
