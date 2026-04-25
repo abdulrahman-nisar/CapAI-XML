@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.capai_xml.domain.database.CapAiDataBase;
+import com.example.capai_xml.domain.model.CaptionItem;
 import com.example.capai_xml.domain.model.User;
 
 import org.jetbrains.annotations.NotNull;
@@ -114,5 +115,15 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
         int rowsDeleted = db.delete(TABLE_USER, null, null);
         db.close();
         return rowsDeleted > 0;
+    }
+
+    @Override
+    public void addCaptionToHistory(@NotNull CaptionItem captionItem) {
+
+    }
+
+    @Override
+    public void clearCaptionHistory() {
+
     }
 }
