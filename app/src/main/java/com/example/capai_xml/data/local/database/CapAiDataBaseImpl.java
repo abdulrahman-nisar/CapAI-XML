@@ -119,7 +119,20 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
 
     @Override
     public void addCaptionToHistory(@NotNull CaptionItem captionItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_INSTAGRAM, captionItem.getInstagramCaption());
+        values.put(COLUMN_FACEBOOK, captionItem.getFacebookCaption());
+        values.put(COLUMN_TWITTER, captionItem.getTwitterCaption());
+        values.put(COLUMN_PINTEREST, captionItem.getPinterestCaption());
+        values.put(COLUMN_LINKEDIN, captionItem.getLinkedinCaption());
+        values.put(COLUMN_THREAD, captionItem.getThreadCaption());
+        values.put(COLUMN_SNAPCHAT, captionItem.getSnapchatCaption());
+        values.put(COLUMN_TIKTOK, captionItem.getTiktokCaption());
+        values.put(COLUMN_IMAGE_URI, captionItem.getImageUri());
 
+        db.insert(TABLE_CAPTION_ITEM, null, values);
+        db.close();
     }
 
     @Override

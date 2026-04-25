@@ -12,4 +12,6 @@ data class CaptionItem(
     var snapChatCaption: String? = "",
     var tiktokCaption: String? = "",
     var imageUri : String
-)
+) {
+    var snapchatCaption: ByteArray = TODO("initialize me")
+}
