@@ -124,24 +124,6 @@
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnFbSignUp"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#402B73"
-        android:text="Sign up with Facebook"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:cornerRadius="12dp"
-        app:icon="@drawable/ic_launcher_foreground"
-        app:iconGravity="textStart"
-        app:iconPadding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOrSignUp" />
-
-    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnGoogleSignUp"
         android:layout_width="0dp"
         android:layout_height="56dp"
@@ -157,7 +139,7 @@
         app:iconPadding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFbSignUp" />
+        app:layout_constraintTop_toBottomOf="@+id/tvOrSignUp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSignUp"

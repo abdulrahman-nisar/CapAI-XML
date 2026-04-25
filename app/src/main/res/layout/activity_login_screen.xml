@@ -114,24 +114,6 @@
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnFbLogin"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#402B73"
-        android:text="Log in with Facebook"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:cornerRadius="12dp"
-        app:icon="@drawable/ic_launcher_foreground"
-        app:iconGravity="textStart"
-        app:iconPadding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOrLogin" />
-
-    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnGoogleLogin"
         android:layout_width="0dp"
         android:layout_height="56dp"
@@ -146,8 +128,9 @@
         app:iconGravity="textStart"
         app:iconPadding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFbLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/tvOrLogin" />
 
     <TextView
         android:id="@+id/tvNoAccount"
