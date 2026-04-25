@@ -7,10 +7,10 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:orientation="vertical"
-    tools:context=".ImageCaptionPreferencesScreen">
+    tools:context=".ui.activities.ImageCaptionPreferencesScreen">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarCaptionPreferences"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primary"
@@ -42,15 +42,11 @@
             android:layout_weight="1"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/this_is_the_area_where_the_picture_will_show"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ivSelectedImage"
+                android:scaleType="centerCrop" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -70,21 +66,11 @@
             android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:rowCount="1"
-                android:useDefaultMargins="false"
-                android:alignmentMode="alignMargins">
-
                 <RadioButton
                     android:id="@+id/rbShort"
                     android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:layout_row="0"
-                    android:layout_columnWeight="1"
                     android:layout_marginEnd="12dp"
                     android:checked="true"
                     android:button="@android:color/transparent"
@@ -100,10 +86,8 @@
                 <RadioButton
                     android:id="@+id/rbLong"
                     android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:layout_row="0"
-                    android:layout_columnWeight="1"
                     android:button="@android:color/transparent"
                     android:background="@drawable/bg_radio_caption_selector"
                     android:gravity="center"
@@ -113,8 +97,6 @@
                     android:textColor="@color/radio_caption_text_selector"
                     android:textSize="15sp"
                     android:textStyle="bold" />
-
-            </GridLayout>
 
         </RadioGroup>
 

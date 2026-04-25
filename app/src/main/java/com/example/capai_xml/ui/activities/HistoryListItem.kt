@@ -1,4 +1,4 @@
-package com.example.capai_xml
+package com.example.capai_xml.ui.activities
 
 data class HistoryListItem(
     val name : String,

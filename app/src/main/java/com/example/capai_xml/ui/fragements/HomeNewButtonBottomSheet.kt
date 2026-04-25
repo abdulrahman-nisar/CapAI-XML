@@ -1,4 +1,4 @@
-package com.example.capai_xml
+package com.example.capai_xml.ui.fragements
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.capai_xml.R
+import com.example.capai_xml.ui.activities.SelectImageScreen
+import com.example.capai_xml.ui.activities.SelectVideoScreen
 
 
 class HomeNewButtonBottomSheet : BottomSheetDialogFragment() {

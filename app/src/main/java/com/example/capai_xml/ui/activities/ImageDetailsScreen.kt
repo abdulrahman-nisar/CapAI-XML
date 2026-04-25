@@ -1,4 +1,4 @@
-package com.example.capai_xml
+package com.example.capai_xml.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.capai_xml.R
 
 class ImageDetailsScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
