@@ -127,7 +127,7 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
         values.put(COLUMN_PINTEREST, captionItem.getPinterestCaption());
         values.put(COLUMN_LINKEDIN, captionItem.getLinkedinCaption());
         values.put(COLUMN_THREAD, captionItem.getThreadCaption());
-        values.put(COLUMN_SNAPCHAT, captionItem.getSnapchatCaption());
+        values.put(COLUMN_SNAPCHAT, captionItem.getSnapChatCaption());
         values.put(COLUMN_TIKTOK, captionItem.getTiktokCaption());
         values.put(COLUMN_IMAGE_URI, captionItem.getImageUri());
 
