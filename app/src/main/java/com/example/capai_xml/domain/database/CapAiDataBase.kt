@@ -7,5 +7,4 @@ interface CapAiDataBase {
     fun addUser(user: User)
     fun getCurrentUser(): User?
     fun deleteCurrentUser() : Boolean
-
 }
