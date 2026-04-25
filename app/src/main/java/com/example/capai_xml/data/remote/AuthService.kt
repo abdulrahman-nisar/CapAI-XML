@@ -1,6 +1,8 @@
 package com.example.capai_xml.data.remote
 
+import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 
@@ -9,7 +11,7 @@ class AuthService {
 
     fun signUpWithEmailAndPassword(email: String, password: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
         auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
+            .addOnCompleteListener { task: Task<AuthResult> ->
                 if (task.isSuccessful) {
                     onSuccess()
                 } else {
@@ -20,7 +22,7 @@ class AuthService {
 
     fun signInWithEmailAndPassword(email: String, password: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
         auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
+            .addOnCompleteListener { task: Task<AuthResult> ->
                 if (task.isSuccessful) {
                     onSuccess()
                 } else {
@@ -32,7 +34,7 @@ class AuthService {
     fun signInWithGoogle(idToken: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
-            .addOnCompleteListener { task ->
+            .addOnCompleteListener { task: Task<AuthResult> ->
                 if (task.isSuccessful) {
                     onSuccess()
                 } else {
