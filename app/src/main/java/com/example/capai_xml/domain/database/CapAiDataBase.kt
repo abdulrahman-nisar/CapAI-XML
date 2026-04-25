@@ -9,5 +9,5 @@ interface CapAiDataBase {
     fun getCurrentUser(): User?
     fun deleteCurrentUser() : Boolean
     fun addCaptionToHistory(captionItem: CaptionItem)
-    fun clearCaptionHistory()
+    fun clearCaptionHistory() : Boolean
 }

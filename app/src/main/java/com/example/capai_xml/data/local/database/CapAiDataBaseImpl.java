@@ -136,7 +136,10 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
     }
 
     @Override
-    public void clearCaptionHistory() {
-
+    public boolean clearCaptionHistory() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsDeleted = db.delete(TABLE_CAPTION_ITEM, null, null);
+        db.close();
+        return rowsDeleted > 0;
     }
 }
