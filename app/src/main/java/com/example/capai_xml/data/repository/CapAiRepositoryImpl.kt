@@ -1,14 +1,19 @@
 package com.example.capai_xml.data.repository
 
 import android.content.Context
+import com.example.capai_xml.data.dto.GetTranscriptionResponse
+import com.example.capai_xml.data.dto.TranscriptionInitiationResponse
+import com.example.capai_xml.data.dto.UploadVideoResponse
 import com.example.capai_xml.data.local.database.CapAiDataBaseImpl
 import com.example.capai_xml.data.remote.AuthService
 import com.example.capai_xml.data.remote.GeminiCaptionGeneration
+import com.example.capai_xml.data.remote.RetrofitInstance
 import com.example.capai_xml.domain.database.CapAiDataBase
 import com.example.capai_xml.domain.model.CaptionItem
 import com.example.capai_xml.domain.model.Length
 import com.example.capai_xml.domain.model.User
 import com.example.capai_xml.domain.repository.CapAiRepository
+import okhttp3.MultipartBody
 import java.security.PrivilegedAction
 
 class CapAiRepositoryImpl(
@@ -71,5 +76,20 @@ class CapAiRepositoryImpl(
         onFailure: (Exception) -> Unit
     ) {
         geminiCaptionGenerator.generateCaptionForImage(imageUri, length, context,onSuccess, onFailure)
+    }
+
+    override suspend fun uploadVideo(apiKey: String, audio: MultipartBody.Part): UploadVideoResponse {
+        return RetrofitInstance.api.uploadVideo(apiKey,audio)
+    }
+
+    override suspend fun initiateTranscription(
+        apiKey: String,
+        body: Map<String, Any>
+    ) : TranscriptionInitiationResponse {
+        return RetrofitInstance.api.initiateTranscription(apiKey,body)
+    }
+
+    override suspend fun getTranscriptionResult(apiKey: String, id: String): GetTranscriptionResponse {
+        return RetrofitInstance.api.getTranscriptionResult(apiKey,id)
     }
 }

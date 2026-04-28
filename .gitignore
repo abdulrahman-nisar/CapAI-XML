@@ -15,5 +15,6 @@
 local.properties
 google-services.json
 Geminicaptiongeneration.kt
+GladiaTranscriptionApi.kt
 
 
