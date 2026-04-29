@@ -245,8 +245,36 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
         return captionList;
     }
 
+
     @Override
     public @NotNull List<@NotNull TranscriptionItem> getAllTranscriptionHistory() {
-        return Collections.emptyList();
+        List <TranscriptionItem> transcriptionList = new java.util.ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_TRANSCRIPTION_ITEM, null, null, null, null, null, COLUMN_TRANSCRIPTION_ID + "DESC");
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int idIndex = cursor.getColumnIndex(COLUMN_CAPTION_ID);
+                int transcriptionTextIndex = cursor.getColumnIndex(COLUMN_TRANSCRIPTION_TEXT);
+                int videoUriIndex = cursor.getColumnIndex(COLUMN_VIDEO_URI);
+
+                int id = cursor.getInt(idIndex);
+                String transcriptionText = cursor.getString(transcriptionTextIndex);
+                String videoUri = cursor.getString(videoUriIndex);
+
+                TranscriptionItem transcriptionItem = new TranscriptionItem(
+                        id,
+                        transcriptionText,
+                        videoUri,
+                        com.example.capai_xml.domain.model.SourceTable.TRANSCRIPTION
+                );
+                transcriptionList.add(transcriptionItem);
+            } while(cursor.moveToNext());
+        }
+        if(cursor != null){
+            cursor.close();
+        }
+
+        db.close();
+        return transcriptionList;
     }
 }
