@@ -15,18 +15,17 @@ if (localPropertiesFile.exists()) {
 
 android {
 
-    defaultConfig{
-        buildConfigField("String", "GLADIA_API_KEY", "\"${localProperties["GLADIA_API_KEY"]}\"")
-        buildConfigField("String", "GEMINI_API_KEY", "\"${localProperties["GEMINI_API_KEY"]}\"")
 
-    }
     namespace = "com.example.capai_xml"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
         }
     }
-
+    defaultConfig {
+        buildConfigField("String", "GLADIA_API_KEY", "\"${localProperties["GLADIA_API_KEY"]}\"")
+        buildConfigField("String", "GEMINI_API_KEY", "\"${localProperties["GEMINI_API_KEY"]}\"")
+    }
     defaultConfig {
         applicationId = "com.example.capai_xml"
         minSdk = 24
@@ -35,6 +34,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        
+
     }
 
     buildTypes {
@@ -58,8 +59,8 @@ android {
 }
 
 dependencies {
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:5.3.2")
     implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
