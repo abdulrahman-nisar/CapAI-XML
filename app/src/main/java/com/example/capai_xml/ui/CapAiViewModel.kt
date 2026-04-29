@@ -6,8 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.capai_xml.BuildConfig
-import com.example.capai_xml.domain.model.Length
+import com.example.capai_xml.domain.model.CaptionItem
 import com.example.capai_xml.domain.model.ImageResult
+import com.example.capai_xml.domain.model.Length
+import com.example.capai_xml.domain.model.SourceTable
+import com.example.capai_xml.domain.model.TranscriptionItem
 import com.example.capai_xml.domain.model.User
 import com.example.capai_xml.domain.model.VideoResult
 import com.example.capai_xml.domain.repository.CapAiRepository
@@ -34,8 +37,15 @@ class CapAiViewModel(
     private val _imageResult = MutableLiveData<ImageResult?>(ImageResult())
     val imageResult: LiveData<ImageResult?> = _imageResult
 
+    private val _captionHistory = MutableLiveData<List<CaptionItem>>(emptyList())
+    val captionHistory: LiveData<List<CaptionItem>> = _captionHistory
+
+    private val _transcriptionHistory = MutableLiveData<List<TranscriptionItem>>(emptyList())
+    val transcriptionHistory: LiveData<List<TranscriptionItem>> = _transcriptionHistory
+
     init {
         loadCurrentUser()
+        loadHistory()
     }
 
     fun addUser(name: String, email: String) {
@@ -50,6 +60,34 @@ class CapAiViewModel(
     fun deleteCurrentUser() {
         if (repository.deleteCurrentUser()) {
             _currentUser.value = null
+        }
+    }
+
+    private fun loadHistory() {
+        _captionHistory.value = repository.getAllCaptionHistory()
+        _transcriptionHistory.value = repository.getAllTranscriptionHistory()
+    }
+
+    fun addCaptionToHistory(captionItem: CaptionItem) {
+        captionItem.source = SourceTable.CAPTION
+        repository.addCaptionToHistory(captionItem)
+        _captionHistory.value = repository.getAllCaptionHistory()
+    }
+
+    fun addTranscriptionToHistory(transcriptionItem: TranscriptionItem) {
+        repository.addTranscriptionToHistory(transcriptionItem)
+        _transcriptionHistory.value = repository.getAllTranscriptionHistory()
+    }
+
+    fun deleteCaptionById(id: Int) {
+        if (repository.deleteCaptionFromHistory(CaptionItem(id = id, imageUri = ""))) {
+            _captionHistory.value = repository.getAllCaptionHistory()
+        }
+    }
+
+    fun deleteTranscriptionById(id: Int) {
+        if (repository.deleteTranscriptionFromHistory(TranscriptionItem(id = id, videoUri = "", source = SourceTable.TRANSCRIPTION))) {
+            _transcriptionHistory.value = repository.getAllTranscriptionHistory()
         }
     }
 
@@ -78,6 +116,7 @@ class CapAiViewModel(
         )
         viewModelScope.launch {
             repository.generateCaptionForImage(imageUri, length, context, { caption ->
+                addCaptionToHistory(caption)
                 _imageResult.postValue(
                     _imageResult.value?.copy(
                         isGenerating = false,
@@ -112,6 +151,13 @@ class CapAiViewModel(
                         videoUrl,
                         BuildConfig.GLADIA_API_KEY
                     )
+                addTranscriptionToHistory(
+                    TranscriptionItem(
+                        transcriptionText = transcriptionResponse.result.transcription.full_transcript,
+                        videoUri = videoUrl,
+                        source = SourceTable.TRANSCRIPTION
+                    )
+                )
                 _videoResult.postValue(
                     _videoResult.value?.copy(
                         isTranscribing = false,

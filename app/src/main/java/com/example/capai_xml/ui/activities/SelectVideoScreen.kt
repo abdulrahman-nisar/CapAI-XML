@@ -28,9 +28,13 @@ class SelectVideoScreen : AppCompatActivity() {
         val toolbarSelectVideo = findViewById<Toolbar>(R.id.toolbarSelectVideo)
 
         val pickVideoLauncher = registerForActivityResult(
-            ActivityResultContracts.GetContent()
+            ActivityResultContracts.OpenDocument()
         ) { uri: Uri? ->
             uri?.let {
+                contentResolver.takePersistableUriPermission(
+                    it,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
                 val intent = Intent(this, GeneratingCaptionScreen::class.java)
                 intent.putExtra("videoUri", it.toString())
                 startActivity(intent)
@@ -41,7 +45,7 @@ class SelectVideoScreen : AppCompatActivity() {
         }
 
         selectVideoButton.setOnClickListener {
-            pickVideoLauncher.launch("video/*")
+            pickVideoLauncher.launch(arrayOf("video/*"))
         }
 
         toolbarSelectVideo.setNavigationOnClickListener {

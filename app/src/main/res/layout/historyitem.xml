@@ -33,6 +33,7 @@
                     app:cardBackgroundColor="#2A2A3E">
 
                     <ImageView
+                        android:id="@+id/ivHistoryThumb"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop" />
@@ -77,6 +78,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDownload"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
@@ -92,6 +94,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:id="@+id/btnDelete"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"

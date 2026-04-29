@@ -32,16 +32,20 @@ class SelectImageScreen : AppCompatActivity() {
         val selectImageScreenButton = findViewById<Button>(R.id.selectImageButton)
 
         val pickImageLauncher = registerForActivityResult(
-            ActivityResultContracts.GetContent()
+            ActivityResultContracts.OpenDocument()
         ) { uri: Uri? ->
             uri?.let {
+                contentResolver.takePersistableUriPermission(
+                    it,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
                 val intent = Intent(this, ImageCaptionPreferencesScreen::class.java)
                 intent.putExtra("selectedImageUri", it.toString())
                 startActivity(intent)
             }
         }
         selectImageScreenButton.setOnClickListener {
-            pickImageLauncher.launch("image/*")
+            pickImageLauncher.launch(arrayOf("image/*"))
         }
 
     }

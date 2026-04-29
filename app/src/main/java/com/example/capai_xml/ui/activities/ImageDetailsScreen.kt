@@ -46,6 +46,8 @@ class ImageDetailsScreen : AppCompatActivity() {
             ?.let { runCatching { Length.valueOf(it) }.getOrNull() }
             ?: Length.SHORT
 
+        val storedPages = buildStoredCaptionPages(intent)
+
         val selectedImageView = findViewById<ImageView>(R.id.ivDetailedSelectedImage)
         val progress = findViewById<ProgressBar>(R.id.progressGenerating)
         val contentScroll = findViewById<View>(R.id.contentScroll)
@@ -56,7 +58,12 @@ class ImageDetailsScreen : AppCompatActivity() {
             selectedImageView.setImageURI(it)
         }
 
-        if (selectedImageUri == null) {
+        if (storedPages.isNotEmpty()) {
+            captionPages = storedPages
+            pager.adapter = CaptionPagerAdapter(storedPages)
+            progress.visibility = View.GONE
+            contentScroll.visibility = View.VISIBLE
+        } else if (selectedImageUri == null) {
             Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show()
         } else {
             viewModel.generateCaptionForImage(selectedImageUri.toString(), length, this)
@@ -109,5 +116,27 @@ class ImageDetailsScreen : AppCompatActivity() {
             }
             startActivity(Intent.createChooser(shareIntent, "Share caption"))
         }
+    }
+
+    private fun buildStoredCaptionPages(intent: Intent): List<CaptionPagerAdapter.CaptionPage> {
+        val instagram = intent.getStringExtra("caption_instagram")
+        val facebook = intent.getStringExtra("caption_facebook")
+        val thread = intent.getStringExtra("caption_thread")
+        val twitter = intent.getStringExtra("caption_twitter")
+        val pinterest = intent.getStringExtra("caption_pinterest")
+        val linkedin = intent.getStringExtra("caption_linkedin")
+        val snapchat = intent.getStringExtra("caption_snapchat")
+        val tiktok = intent.getStringExtra("caption_tiktok")
+
+        return listOfNotNull(
+            instagram?.takeIf { it.isNotBlank() }?.let { CaptionPagerAdapter.CaptionPage("Instagram", it) },
+            facebook?.takeIf { it.isNotBlank() }?.let { CaptionPagerAdapter.CaptionPage("Facebook", it) },
+            thread?.takeIf { it.isNotBlank() }?.let { CaptionPagerAdapter.CaptionPage("Thread", it) },
+            twitter?.takeIf { it.isNotBlank() }?.let { CaptionPagerAdapter.CaptionPage("Twitter", it) },
+            pinterest?.takeIf { it.isNotBlank() }?.let { CaptionPagerAdapter.CaptionPage("Pinterest", it) },
+            linkedin?.takeIf { it.isNotBlank() }?.let { CaptionPagerAdapter.CaptionPage("LinkedIn", it) },
+            snapchat?.takeIf { it.isNotBlank() }?.let { CaptionPagerAdapter.CaptionPage("Snapchat", it) },
+            tiktok?.takeIf { it.isNotBlank() }?.let { CaptionPagerAdapter.CaptionPage("TikTok", it) },
+        )
     }
 }

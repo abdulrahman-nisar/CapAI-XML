@@ -11,6 +11,7 @@ import com.example.capai_xml.data.remote.RetrofitInstance
 import com.example.capai_xml.domain.database.CapAiDataBase
 import com.example.capai_xml.domain.model.CaptionItem
 import com.example.capai_xml.domain.model.Length
+import com.example.capai_xml.domain.model.TranscriptionItem
 import com.example.capai_xml.domain.model.User
 import com.example.capai_xml.domain.repository.CapAiRepository
 import com.example.capai_xml.domain.usecase.GladiaTranscriptionServiceUseCase
@@ -37,6 +38,26 @@ class CapAiRepositoryImpl(
 
     override fun addCaptionToHistory(captionItem: CaptionItem) {
         capAiDataBase.addCaptionToHistory(captionItem)
+    }
+
+    override fun deleteCaptionFromHistory(captionItem: CaptionItem): Boolean {
+        return capAiDataBase.deleteCaptionFromHistory(captionItem)
+    }
+
+    override fun addTranscriptionToHistory(transcriptionItem: TranscriptionItem) {
+        capAiDataBase.addTranscriptionToHistory(transcriptionItem)
+    }
+
+    override fun deleteTranscriptionFromHistory(transcriptionItem: TranscriptionItem): Boolean {
+        return capAiDataBase.deleteTranscriptionFromHistory(transcriptionItem)
+    }
+
+    override fun getAllCaptionHistory(): List<CaptionItem> {
+        return capAiDataBase.getAllCaptionHistory()
+    }
+
+    override fun getAllTranscriptionHistory(): List<TranscriptionItem> {
+        return capAiDataBase.getAllTranscriptionHistory()
     }
 
     override fun clearCaptionHistory() {

@@ -184,7 +184,7 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
     @Override
     public boolean deleteTranscriptionFromHistory(@NotNull TranscriptionItem transcriptionItem) {
         SQLiteDatabase db = this.getWritableDatabase();
-        int rowsDeleted = db.delete(TABLE_CAPTION_ITEM, COLUMN_CAPTION_ID + " = ?", new String[]{String.valueOf(transcriptionItem.getId())});
+        int rowsDeleted = db.delete(TABLE_TRANSCRIPTION_ITEM, COLUMN_TRANSCRIPTION_ID + " = ?", new String[]{String.valueOf(transcriptionItem.getId())});
         db.close();
         return rowsDeleted > 0;
     }
@@ -250,10 +250,10 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
     public @NotNull List<@NotNull TranscriptionItem> getAllTranscriptionHistory() {
         List <TranscriptionItem> transcriptionList = new java.util.ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_TRANSCRIPTION_ITEM, null, null, null, null, null, COLUMN_TRANSCRIPTION_ID + "DESC");
+        Cursor cursor = db.query(TABLE_TRANSCRIPTION_ITEM, null, null, null, null, null, COLUMN_TRANSCRIPTION_ID + " DESC");
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                int idIndex = cursor.getColumnIndex(COLUMN_CAPTION_ID);
+                int idIndex = cursor.getColumnIndex(COLUMN_TRANSCRIPTION_ID);
                 int transcriptionTextIndex = cursor.getColumnIndex(COLUMN_TRANSCRIPTION_TEXT);
                 int videoUriIndex = cursor.getColumnIndex(COLUMN_VIDEO_URI);
 
@@ -268,7 +268,7 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
                         com.example.capai_xml.domain.model.SourceTable.TRANSCRIPTION
                 );
                 transcriptionList.add(transcriptionItem);
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         if(cursor != null){
             cursor.close();
