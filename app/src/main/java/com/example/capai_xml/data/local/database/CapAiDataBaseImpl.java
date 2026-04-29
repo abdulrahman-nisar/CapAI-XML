@@ -191,7 +191,58 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
 
     @Override
     public @NotNull List<@NotNull CaptionItem> getAllCaptionHistory() {
-        return Collections.emptyList();
+        List<CaptionItem> captionList = new java.util.ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_CAPTION_ITEM, null, null, null, null, null, COLUMN_CAPTION_ID + " DESC");
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int idIndex = cursor.getColumnIndex(COLUMN_CAPTION_ID);
+                int instagramIndex = cursor.getColumnIndex(COLUMN_INSTAGRAM);
+                int facebookIndex = cursor.getColumnIndex(COLUMN_FACEBOOK);
+                int twitterIndex = cursor.getColumnIndex(COLUMN_TWITTER);
+                int pinterestIndex = cursor.getColumnIndex(COLUMN_PINTEREST);
+                int linkedinIndex = cursor.getColumnIndex(COLUMN_LINKEDIN);
+                int threadIndex = cursor.getColumnIndex(COLUMN_THREAD);
+                int snapchatIndex = cursor.getColumnIndex(COLUMN_SNAPCHAT);
+                int tiktokIndex = cursor.getColumnIndex(COLUMN_TIKTOK);
+                int imageUriIndex = cursor.getColumnIndex(COLUMN_IMAGE_URI);
+
+                int id = cursor.getInt(idIndex);
+
+                String instagram = cursor.getString(instagramIndex);
+                String facebook = cursor.getString(facebookIndex);
+                String twitter = cursor.getString(twitterIndex);
+                String pinterest = cursor.getString(pinterestIndex);
+                String linkedin = cursor.getString(linkedinIndex);
+                String thread = cursor.getString(threadIndex);
+                String snapchat = cursor.getString(snapchatIndex);
+                String tiktok = cursor.getString(tiktokIndex);
+                String imageUri = cursor.getString(imageUriIndex);
+
+                CaptionItem item = new CaptionItem(
+                        id,
+                        instagram,
+                        facebook,
+                        twitter,
+                        pinterest,
+                        linkedin,
+                        thread,
+                        snapchat,
+                        tiktok,
+                        imageUri != null ? imageUri : "",
+                        com.example.capai_xml.domain.model.SourceTable.CAPTION
+                );
+                captionList.add(item);
+            } while (cursor.moveToNext());
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        db.close();
+
+        return captionList;
     }
 
     @Override
