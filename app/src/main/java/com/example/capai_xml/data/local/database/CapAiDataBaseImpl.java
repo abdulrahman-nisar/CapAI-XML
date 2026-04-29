@@ -10,12 +10,16 @@ import androidx.annotation.Nullable;
 
 import com.example.capai_xml.domain.database.CapAiDataBase;
 import com.example.capai_xml.domain.model.CaptionItem;
+import com.example.capai_xml.domain.model.TranscriptionItem;
 import com.example.capai_xml.domain.model.User;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.List;
+
 public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase {
-    
+
     private static final String TABLE_USER = "User";
     private static final String COLUMN_USER_ID = "id";
     private static final String COLUMN_NAME = "name";
@@ -33,6 +37,12 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
     private static final String COLUMN_SNAPCHAT = "snapChatCaption";
     private static final String COLUMN_TIKTOK = "tiktokCaption";
     private static final String COLUMN_IMAGE_URI = "imageUri";
+
+    private static final String TABLE_TRANSCRIPTION_ITEM = "TranscriptionItem";
+    private static final String COLUMN_TRANSCRIPTION_ID = "id";
+    private static final String COLUMN_TRANSCRIPTION_TEXT = "transcriptionText";
+    private static final String COLUMN_VIDEO_URI = "videoUri";
+    private static final String COLUMN_SOURCE = "source";
 
     public CapAiDataBaseImpl(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -59,12 +69,20 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
                 COLUMN_TIKTOK + " TEXT, " +
                 COLUMN_IMAGE_URI + " TEXT)";
         sqLiteDatabase.execSQL(createTableCaptionItem);
+
+        String createTableTranscriptionItem = "CREATE TABLE " + TABLE_TRANSCRIPTION_ITEM + " (" +
+                COLUMN_TRANSCRIPTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_TRANSCRIPTION_TEXT + " TEXT, " +
+                COLUMN_VIDEO_URI + " TEXT, " +
+                COLUMN_SOURCE + " TEXT)";
+        sqLiteDatabase.execSQL(createTableTranscriptionItem);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CAPTION_ITEM);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_TRANSCRIPTION_ITEM);
         onCreate(sqLiteDatabase);
     }
 
@@ -76,7 +94,7 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
         values.put(COLUMN_NAME, user.getName());
         values.put(COLUMN_EMAIL, user.getEmail());
         values.put(COLUMN_IS_NEW_USER, user.isNewUser() ? 1 : 0);
-        
+
         db.insert(TABLE_USER, null, values);
         db.close();
     }
@@ -86,7 +104,7 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_USER, null, null, null, null, null, null);
         User user = null;
-        
+
         if (cursor != null && cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex(COLUMN_USER_ID);
             int nameIndex = cursor.getColumnIndex(COLUMN_NAME);
@@ -100,12 +118,12 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
 
             user = new User(id, name, email, isNewUser);
         }
-        
+
         if (cursor != null) {
             cursor.close();
         }
         db.close();
-        
+
         return user;
     }
 
@@ -141,5 +159,43 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
         int rowsDeleted = db.delete(TABLE_CAPTION_ITEM, null, null);
         db.close();
         return rowsDeleted > 0;
+    }
+
+    @Override
+    public boolean deleteCaptionFromHistory(@NotNull CaptionItem captionItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsDeleted = db.delete(TABLE_CAPTION_ITEM, COLUMN_CAPTION_ID + " = ?", new String[]{String.valueOf(captionItem.getId())});
+        db.close();
+        return rowsDeleted > 0;
+    }
+
+    @Override
+    public void addTranscriptionToHistory(@NotNull TranscriptionItem transcriptionItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TRANSCRIPTION_TEXT, transcriptionItem.getTranscriptionText());
+        values.put(COLUMN_VIDEO_URI, transcriptionItem.getVideoUri());
+        values.put(COLUMN_SOURCE, transcriptionItem.getSource().name());
+
+        db.insert(TABLE_TRANSCRIPTION_ITEM, null, values);
+        db.close();
+    }
+
+    @Override
+    public boolean deleteTranscriptionFromHistory(@NotNull TranscriptionItem transcriptionItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsDeleted = db.delete(TABLE_CAPTION_ITEM, COLUMN_CAPTION_ID + " = ?", new String[]{String.valueOf(transcriptionItem.getId())});
+        db.close();
+        return rowsDeleted > 0;
+    }
+
+    @Override
+    public @NotNull List<@NotNull CaptionItem> getAllCaptionHistory() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public @NotNull List<@NotNull TranscriptionItem> getAllTranscriptionHistory() {
+        return Collections.emptyList();
     }
 }
