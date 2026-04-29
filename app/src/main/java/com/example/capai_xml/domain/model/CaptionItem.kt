@@ -11,5 +11,6 @@ data class CaptionItem(
     var threadCaption: String? = "",
     var snapChatCaption: String? = "",
     var tiktokCaption: String? = "",
-    var imageUri : String
+    var imageUri : String,
+    var source : SourceTable
 )
