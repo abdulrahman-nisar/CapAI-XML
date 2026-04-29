@@ -69,6 +69,10 @@ class CapAiRepositoryImpl(
         authService.signInWithGoogle(idToken, onSuccess, onFailure)
     }
 
+    override fun signOut() {
+        authService.signOut()
+    }
+
     override suspend fun generateCaptionForImage(
         imageUri: String,
         length: Length,

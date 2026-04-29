@@ -20,7 +20,7 @@ class HistoryItemAdapter(items: List<HistoryListItem>) :
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.name)
-        val date: TextView = view.findViewById(R.id.date)
+        val date: TextView = view.findViewById(R.id.description)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,7 +32,7 @@ class HistoryItemAdapter(items: List<HistoryListItem>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = visibleItems[position]
         holder.name.text = item.name
-        holder.date.text = item.date
+        holder.date.text = item.description
     }
 
     override fun getItemCount(): Int = visibleItems.size
@@ -47,7 +47,7 @@ class HistoryItemAdapter(items: List<HistoryListItem>) :
         } else {
             allItems.filter {
                 it.name.contains(q, ignoreCase = true) ||
-                    it.date.contains(q, ignoreCase = true)
+                    it.description.contains(q, ignoreCase = true)
             }
         }
 

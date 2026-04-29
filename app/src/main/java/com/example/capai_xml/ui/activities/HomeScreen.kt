@@ -1,22 +1,35 @@
 package com.example.capai_xml.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doOnTextChanged
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.capai_xml.ui.fragements.HomeNewButtonBottomSheet
+import com.example.capai_xml.CapAiApp
 import com.example.capai_xml.R
+import com.example.capai_xml.ui.CapAiViewModel
+import com.example.capai_xml.ui.CapAiViewModelFactory
 import com.example.capai_xml.ui.adapter.HistoryItemAdapter
+import com.example.capai_xml.ui.fragements.HomeNewButtonBottomSheet
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputEditText
 
 class HomeScreen : AppCompatActivity() {
+
+    private val viewModel: CapAiViewModel by viewModels {
+        CapAiViewModelFactory((application as CapAiApp).repository)
+    }
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: HistoryItemAdapter
@@ -33,6 +46,29 @@ class HomeScreen : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val drawerLayout = findViewById<DrawerLayout>(R.id.main)
+        val navView = findViewById<NavigationView>(R.id.navView)
+        val menuButton = findViewById<ImageView>(R.id.ivMenu)
+
+        menuButton.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+
+        navView.setNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_logout -> {
+                    viewModel.signOut()
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    val intent = Intent(this, LoginScreen::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
         }
 
         etSearch = findViewById(R.id.etSearch)

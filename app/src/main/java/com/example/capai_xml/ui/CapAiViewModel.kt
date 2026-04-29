@@ -65,6 +65,11 @@ class CapAiViewModel(
         repository.signInWithGoogle(idToken, onSuccess, onFailure)
     }
 
+    fun signOut() {
+        repository.signOut()
+        deleteCurrentUser()
+    }
+
     fun generateCaptionForImage(imageUri: String, length: Length , context: Context) {
         _imageResult.value = (_imageResult.value ?: ImageResult()).copy(
             isGenerating = true,
