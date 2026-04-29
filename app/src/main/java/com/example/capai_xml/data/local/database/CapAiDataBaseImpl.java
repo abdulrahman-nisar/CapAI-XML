@@ -183,7 +183,10 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
 
     @Override
     public boolean deleteTranscriptionFromHistory(@NotNull TranscriptionItem transcriptionItem) {
-        return false;
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsDeleted = db.delete(TABLE_CAPTION_ITEM, COLUMN_CAPTION_ID + " = ?", new String[]{String.valueOf(transcriptionItem.getId())});
+        db.close();
+        return rowsDeleted > 0;
     }
 
     @Override
