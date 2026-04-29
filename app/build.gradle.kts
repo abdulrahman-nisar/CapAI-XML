@@ -17,6 +17,8 @@ android {
 
     defaultConfig{
         buildConfigField("String", "GLADIA_API_KEY", "\"${localProperties["GLADIA_API_KEY"]}\"")
+        buildConfigField("String", "GEMINI_API_KEY", "\"${localProperties["GEMINI_API_KEY"]}\"")
+
     }
     namespace = "com.example.capai_xml"
     compileSdk {
