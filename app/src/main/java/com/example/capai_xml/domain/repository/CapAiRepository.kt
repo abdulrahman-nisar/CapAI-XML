@@ -3,6 +3,7 @@ package com.example.capai_xml.domain.repository
 import android.content.Context
 import com.example.capai_xml.data.dto.GetTranscriptionResponse
 import com.example.capai_xml.data.dto.TranscriptionInitiationResponse
+import com.example.capai_xml.data.dto.UploadVideoResponse
 import com.example.capai_xml.domain.model.CaptionItem
 import com.example.capai_xml.domain.model.Length
 import com.example.capai_xml.domain.model.User

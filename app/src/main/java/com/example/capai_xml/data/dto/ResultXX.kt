@@ -8,5 +8,4 @@ data class ResultXX(
     val speaker: Int,
     val start: Double,
     val text: String,
-    val words: List<Word>
 )

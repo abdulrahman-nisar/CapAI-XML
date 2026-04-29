@@ -3,6 +3,7 @@ package com.example.capai_xml.data.repository
 import android.content.Context
 import com.example.capai_xml.data.dto.GetTranscriptionResponse
 import com.example.capai_xml.data.dto.TranscriptionInitiationResponse
+import com.example.capai_xml.data.dto.UploadVideoResponse
 import com.example.capai_xml.data.local.database.CapAiDataBaseImpl
 import com.example.capai_xml.data.remote.AuthService
 import com.example.capai_xml.data.remote.GeminiCaptionGeneration

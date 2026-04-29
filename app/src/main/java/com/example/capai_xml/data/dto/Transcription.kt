@@ -5,5 +5,4 @@ data class Transcription(
     val languages: List<String>,
     val sentences: List<Sentence>,
     val subtitles: List<Subtitle>,
-    val utterances: List<Utterance>
 )

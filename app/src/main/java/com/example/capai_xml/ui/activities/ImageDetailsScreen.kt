@@ -20,12 +20,15 @@ import com.example.capai_xml.domain.model.Length
 import com.example.capai_xml.ui.CapAiViewModel
 import com.example.capai_xml.ui.CapAiViewModelFactory
 import com.example.capai_xml.ui.adapter.CaptionPagerAdapter
+import com.google.android.material.button.MaterialButton
 
 class ImageDetailsScreen : AppCompatActivity() {
 
     private val viewModel: CapAiViewModel by viewModels {
         CapAiViewModelFactory((application as CapAiApp).repository)
     }
+
+    private var captionPages: List<CaptionPagerAdapter.CaptionPage> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +50,7 @@ class ImageDetailsScreen : AppCompatActivity() {
         val progress = findViewById<ProgressBar>(R.id.progressGenerating)
         val contentScroll = findViewById<View>(R.id.contentScroll)
         val pager = findViewById<ViewPager2>(R.id.pagerCaptions)
+        val shareButton = findViewById<MaterialButton>(R.id.btnShare)
 
         selectedImageUri?.let {
             selectedImageView.setImageURI(it)
@@ -78,6 +82,7 @@ class ImageDetailsScreen : AppCompatActivity() {
                 item.snapChatCaption?.takeIf { it.isNotBlank() }?.let { CaptionPagerAdapter.CaptionPage("Snapchat", it) },
                 item.tiktokCaption?.takeIf { it.isNotBlank() }?.let { CaptionPagerAdapter.CaptionPage("TikTok", it) },
             )
+            captionPages = pages
             pager.adapter = CaptionPagerAdapter(pages)
         }
 
@@ -86,6 +91,23 @@ class ImageDetailsScreen : AppCompatActivity() {
                 it.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(it)
             }
+        }
+
+
+        shareButton.setOnClickListener {
+            if (captionPages.isEmpty()) {
+                Toast.makeText(this, "No captions to share", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val index = pager.currentItem.coerceIn(0, captionPages.lastIndex)
+            val page = captionPages[index]
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_SUBJECT, "${page.platform} caption")
+                putExtra(Intent.EXTRA_TEXT, "${page.platform}\n\n${page.caption}")
+            }
+            startActivity(Intent.createChooser(shareIntent, "Share caption"))
         }
     }
 }

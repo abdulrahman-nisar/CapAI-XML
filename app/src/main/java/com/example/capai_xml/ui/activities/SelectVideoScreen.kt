@@ -1,5 +1,6 @@
 package com.example.capai_xml.ui.activities
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
@@ -30,8 +31,11 @@ class SelectVideoScreen : AppCompatActivity() {
             ActivityResultContracts.GetContent()
         ) { uri: Uri? ->
             uri?.let {
-                val bottomSheet = CaptionTranslationBottomSheet.Companion.newInstance(it.toString())
-                bottomSheet.show(supportFragmentManager, "AIOptionsBottomSheet")
+                val intent = Intent(this, GeneratingCaptionScreen::class.java)
+                intent.putExtra("videoUri", it.toString())
+                startActivity(intent)
+//                val bottomSheet = CaptionTranslationBottomSheet.Companion.newInstance(it.toString())
+//                bottomSheet.show(supportFragmentManager, "AIOptionsBottomSheet")
 
             }
         }
