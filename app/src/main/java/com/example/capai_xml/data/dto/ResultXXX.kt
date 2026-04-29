@@ -1,8 +1,8 @@
 package com.example.capai_xml.data.dto
 
 data class ResultXXX(
-    val end: Int,
+    val end: Double,
     val entity_type: String,
-    val start: Int,
+    val start: Double,
     val text: String
 )

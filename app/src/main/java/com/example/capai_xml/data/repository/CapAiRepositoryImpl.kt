@@ -3,7 +3,6 @@ package com.example.capai_xml.data.repository
 import android.content.Context
 import com.example.capai_xml.data.dto.GetTranscriptionResponse
 import com.example.capai_xml.data.dto.TranscriptionInitiationResponse
-import com.example.capai_xml.data.dto.UploadVideoResponse
 import com.example.capai_xml.data.local.database.CapAiDataBaseImpl
 import com.example.capai_xml.data.remote.AuthService
 import com.example.capai_xml.data.remote.GeminiCaptionGeneration
@@ -13,11 +12,12 @@ import com.example.capai_xml.domain.model.CaptionItem
 import com.example.capai_xml.domain.model.Length
 import com.example.capai_xml.domain.model.User
 import com.example.capai_xml.domain.repository.CapAiRepository
+import com.example.capai_xml.domain.usecase.GladiaTranscriptionServiceUseCase
 import okhttp3.MultipartBody
 import java.security.PrivilegedAction
 
 class CapAiRepositoryImpl(
-    context : Context,
+    context : Context? = null,
     private val capAiDataBase: CapAiDataBase = CapAiDataBaseImpl(context, "cap_ai_db", null,1),
     private val authService: AuthService = AuthService(),
     private val geminiCaptionGenerator : GeminiCaptionGeneration = GeminiCaptionGeneration()
@@ -84,7 +84,7 @@ class CapAiRepositoryImpl(
 
     override suspend fun initiateTranscription(
         apiKey: String,
-        body: Map<String, Any>
+        body: HashMap<String, Any>
     ) : TranscriptionInitiationResponse {
         return RetrofitInstance.api.initiateTranscription(apiKey,body)
     }

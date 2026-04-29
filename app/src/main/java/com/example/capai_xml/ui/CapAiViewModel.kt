@@ -5,21 +5,34 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.capai_xml.BuildConfig
 import com.example.capai_xml.domain.model.Length
-import com.example.capai_xml.domain.model.Result
+import com.example.capai_xml.domain.model.ImageResult
 import com.example.capai_xml.domain.model.User
+import com.example.capai_xml.domain.model.VideoResult
 import com.example.capai_xml.domain.repository.CapAiRepository
+import com.example.capai_xml.domain.usecase.GladiaTranscriptionServiceUseCase
 import kotlinx.coroutines.launch
 
 class CapAiViewModel(
-    private val repository: CapAiRepository
+    private val repository: CapAiRepository,
+    private val gladiaTranscriptionServiceUseCase: GladiaTranscriptionServiceUseCase = GladiaTranscriptionServiceUseCase(repository)
 ) : ViewModel() {
+
+    // Explicit overload to avoid NoSuchMethodError when the factory calls a one-arg ctor.
+    constructor(repository: CapAiRepository) : this(
+        repository,
+        GladiaTranscriptionServiceUseCase(repository)
+    )
 
     private val _currentUser = MutableLiveData<User?>()
     val currentUser: LiveData<User?> = _currentUser
 
-    private val _result = MutableLiveData<Result?>(Result())
-    val result: LiveData<Result?> = _result
+    private val _videoResult = MutableLiveData<VideoResult?>(VideoResult())
+    val videoResult: LiveData<VideoResult?> = _videoResult
+
+    private val _imageResult = MutableLiveData<ImageResult?>(ImageResult())
+    val imageResult: LiveData<ImageResult?> = _imageResult
 
     init {
         loadCurrentUser()
@@ -53,15 +66,15 @@ class CapAiViewModel(
     }
 
     fun generateCaptionForImage(imageUri: String, length: Length , context: Context) {
-        _result.value = (_result.value ?: Result()).copy(
+        _imageResult.value = (_imageResult.value ?: ImageResult()).copy(
             isGenerating = true,
             errorMessage = null,
             isSuccess = false
         )
         viewModelScope.launch {
             repository.generateCaptionForImage(imageUri, length, context, { caption ->
-                _result.postValue(
-                    _result.value?.copy(
+                _imageResult.postValue(
+                    _imageResult.value?.copy(
                         isGenerating = false,
                         isSuccess = true,
                         errorMessage = null,
@@ -69,14 +82,49 @@ class CapAiViewModel(
                     )
                 )
             }, { exception ->
-                _result.postValue(
-                    _result.value?.copy(
+                _imageResult.postValue(
+                    _imageResult.value?.copy(
                         isGenerating = false,
                         isSuccess = false,
                         errorMessage = exception.message ?: "Unknown error"
                     )
                 )
             })
+        }
+    }
+
+    fun transcribeFromVideoUrl(videoUrl: String,context: Context) {
+        _videoResult.value = (_videoResult.value ?: VideoResult()).copy(
+            isTranscribing = true,
+            errorMessage = null,
+            isSuccess = false
+        )
+        viewModelScope.launch {
+            try {
+                val transcriptionResponse =
+                    gladiaTranscriptionServiceUseCase.transcribeVideo(
+                        context,
+                        videoUrl,
+                        BuildConfig.GLADIA_API_KEY
+                    )
+                _videoResult.postValue(
+                    _videoResult.value?.copy(
+                        isTranscribing = false,
+                        isSuccess = true,
+                        errorMessage = null,
+                        transcriptionText = transcriptionResponse.result.transcription.full_transcript
+                    )
+                )
+            } catch (e: Exception) {
+                _videoResult.postValue(
+                    _videoResult.value?.copy(
+                        isTranscribing = false,
+                        isSuccess = false,
+                        errorMessage = e.message ?: "Unknown error"
+                    )
+                )
+            }
+
         }
     }
 

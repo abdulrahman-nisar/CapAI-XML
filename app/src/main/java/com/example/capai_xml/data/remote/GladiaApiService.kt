@@ -24,7 +24,7 @@ interface GladiaApiService {
     @POST("pre-recorded")
     suspend fun initiateTranscription(
         @Header("x-gladia-key") apiKey: String,
-        @Body body : Map<String, Any>
+        @Body body : HashMap<String, Any>
     ) : TranscriptionInitiationResponse
 
     @GET("pre-recorded/{id}")

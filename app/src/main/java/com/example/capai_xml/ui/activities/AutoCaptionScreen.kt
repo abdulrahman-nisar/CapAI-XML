@@ -2,9 +2,9 @@ package com.example.capai_xml.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.MediaController
+import android.widget.TextView
 import android.widget.VideoView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,22 +23,20 @@ class AutoCaptionScreen : AppCompatActivity() {
             insets
         }
 
-        val editCaptionButton = findViewById<Button>(R.id.btnEditCaption)
         val backButtonImage = findViewById<ImageView>(R.id.ACBack)
         val saveButtonImage = findViewById<ImageView>(R.id.ivSave)
         val videoView = findViewById<VideoView>(R.id.autoCaptionVideoView)
+        val captionTextView = findViewById<TextView>(R.id.tvAutoCaptionText)
         val uri = intent.getStringExtra("videoUri")
+        val transcriptionText = intent.getStringExtra("transcriptionText")
+        captionTextView.text = transcriptionText?.takeIf { it.isNotBlank() }
+            ?: "Caption will appear here once ready."
         videoView.setVideoPath(uri)
         val mediaController = MediaController(this)
         mediaController.setAnchorView(videoView)
         videoView.setMediaController(mediaController)
         videoView.start()
 
-        editCaptionButton.setOnClickListener {
-            val intent = Intent(this, EditCaptionScreen::class.java)
-            intent.putExtra("videoUri", uri)
-            startActivity(intent)
-        }
 
         backButtonImage.setOnClickListener {
             Intent(this, HomeScreen::class.java).also {

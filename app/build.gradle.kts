@@ -1,9 +1,23 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
 }
 
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
+} else {
+    throw GradleException("local.properties file not found. Please create one with the necessary properties.")
+}
+
 android {
+
+    defaultConfig{
+        buildConfigField("String", "GLADIA_API_KEY", "\"${localProperties["GLADIA_API_KEY"]}\"")
+    }
     namespace = "com.example.capai_xml"
     compileSdk {
         version = release(36) {

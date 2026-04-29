@@ -2,7 +2,6 @@ package com.example.capai_xml.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -59,7 +58,7 @@ class ImageDetailsScreen : AppCompatActivity() {
             viewModel.generateCaptionForImage(selectedImageUri.toString(), length, this)
         }
 
-        viewModel.result.observe(this) { res ->
+        viewModel.imageResult.observe(this) { res ->
             val isGenerating = res?.isGenerating == true
             progress.visibility = if (isGenerating) View.VISIBLE else View.GONE
             contentScroll.visibility = if (isGenerating) View.GONE else View.VISIBLE

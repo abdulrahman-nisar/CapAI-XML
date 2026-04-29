@@ -1,8 +1,8 @@
 package com.example.capai_xml.domain.model
 
-data class Result(
-    var captionItem: CaptionItem? = null,
-    var isGenerating: Boolean = false,
+data class VideoResult(
+    var transcriptionText: String? = null,
+    var isTranscribing: Boolean = false,
     var isSuccess: Boolean = false,
     var errorMessage: String? = null
 )

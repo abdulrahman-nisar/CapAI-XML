@@ -66,22 +66,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="#80000000"
-                android:gravity="center"
-                android:padding="12dp"
-                android:text="This is where auto-generated captions will appear on the video"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
         </FrameLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
+    <!--
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEditCaption"
         style="@style/Widget.Material3.Button.OutlinedButton"
@@ -102,5 +91,19 @@
         app:iconTint="@color/white"
         app:iconGravity="textStart"
         app:iconPadding="8dp" />
+    -->
+
+    <TextView
+        android:id="@+id/tvAutoCaptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="#1A1A2E"
+        android:padding="12dp"
+        android:text="Caption will appear here once ready."
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
