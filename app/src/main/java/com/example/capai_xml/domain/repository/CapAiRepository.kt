@@ -22,6 +22,8 @@ interface CapAiRepository {
     fun getAllCaptionHistory() : List<CaptionItem>
     fun getAllTranscriptionHistory() : List<TranscriptionItem>
     fun clearCaptionHistory()
+    fun clearTranscriptionHistory()
+    fun syncHistoryForCurrentUser(onSuccess: () -> Unit, onFailure: (Exception) -> Unit)
     fun signUpWithEmailAndPassword(email: String, password: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit)
     fun signInWithEmailAndPassword(email: String, password: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit)
     fun signInWithGoogle(idToken: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit)

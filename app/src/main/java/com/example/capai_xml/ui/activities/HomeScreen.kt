@@ -19,13 +19,16 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.ComposeView
 import com.example.capai_xml.CapAiApp
 import com.example.capai_xml.R
 import com.example.capai_xml.ui.CapAiViewModel
 import com.example.capai_xml.ui.CapAiViewModelFactory
-import com.example.capai_xml.ui.adapter.HistoryItemAdapter
+import com.example.capai_xml.ui.compose.HistoryFeed
+import androidx.compose.material3.MaterialTheme
 import com.example.capai_xml.ui.fragements.HomeNewButtonBottomSheet
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -40,13 +43,14 @@ class HomeScreen : AppCompatActivity() {
         CapAiViewModelFactory((application as CapAiApp).repository)
     }
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: HistoryItemAdapter
+    private lateinit var composeHistoryList: ComposeView
 
     private lateinit var etSearch: TextInputEditText
 
     private var captionHistory: List<CaptionItem> = emptyList()
     private var transcriptionHistory: List<TranscriptionItem> = emptyList()
+    private var historyItems by mutableStateOf<List<HistoryListItem>>(emptyList())
+    private var searchQuery by mutableStateOf("")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,21 +87,23 @@ class HomeScreen : AppCompatActivity() {
         }
 
         etSearch = findViewById(R.id.etSearch)
-        recyclerView = findViewById(R.id.recyclerView)
-
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = HistoryItemAdapter(
-            emptyList(),
-            onItemClick = { item -> openHistoryItem(item) },
-            onDownloadClick = { item -> downloadHistoryItem(item) },
-            onDeleteClick = { item ->
-                when (item.source) {
-                    SourceTable.CAPTION -> viewModel.deleteCaptionById(item.id)
-                    SourceTable.TRANSCRIPTION -> viewModel.deleteTranscriptionById(item.id)
-                }
+        composeHistoryList = findViewById(R.id.composeHistoryList)
+        composeHistoryList.setContent {
+            MaterialTheme {
+                HistoryFeed(
+                    items = historyItems,
+                    query = searchQuery,
+                    onItemClick = { item -> openHistoryItem(item) },
+                    onDownloadClick = { item -> downloadHistoryItem(item) },
+                    onDeleteClick = { item ->
+                        when (item.source) {
+                            SourceTable.CAPTION -> viewModel.deleteCaptionById(item.id)
+                            SourceTable.TRANSCRIPTION -> viewModel.deleteTranscriptionById(item.id)
+                        }
+                    }
+                )
             }
-        )
-        recyclerView.adapter = adapter
+        }
 
         viewModel.captionHistory.observe(this) { list ->
             captionHistory = list
@@ -110,7 +116,7 @@ class HomeScreen : AppCompatActivity() {
         }
 
         etSearch.doOnTextChanged { text, _, _, _ ->
-            adapter.search(text?.toString().orEmpty())
+            searchQuery = text?.toString().orEmpty()
         }
 
         val fabButton = findViewById<ExtendedFloatingActionButton>(R.id.fabNew)
@@ -161,7 +167,7 @@ class HomeScreen : AppCompatActivity() {
             )
         }
 
-        adapter.updateItems(captions + transcriptions)
+        historyItems = captions + transcriptions
     }
 
     private fun openHistoryItem(item: HistoryListItem) {

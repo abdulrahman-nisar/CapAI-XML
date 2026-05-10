@@ -22,7 +22,6 @@ class CapAiViewModel(
     private val gladiaTranscriptionServiceUseCase: GladiaTranscriptionServiceUseCase = GladiaTranscriptionServiceUseCase(repository)
 ) : ViewModel() {
 
-    // Explicit overload to avoid NoSuchMethodError when the factory calls a one-arg ctor.
     constructor(repository: CapAiRepository) : this(
         repository,
         GladiaTranscriptionServiceUseCase(repository)
@@ -96,15 +95,28 @@ class CapAiViewModel(
     }
 
     fun signInWithEmailAndPassword(email: String, password: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
-        repository.signInWithEmailAndPassword(email, password, onSuccess, onFailure)
+        repository.signInWithEmailAndPassword(email, password, {
+            repository.syncHistoryForCurrentUser({
+                loadHistory()
+                onSuccess()
+            }, onFailure)
+        }, onFailure)
     }
 
     fun signInWithGoogle(idToken: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
-        repository.signInWithGoogle(idToken, onSuccess, onFailure)
+        repository.signInWithGoogle(idToken, {
+            repository.syncHistoryForCurrentUser({
+                loadHistory()
+                onSuccess()
+            }, onFailure)
+        }, onFailure)
     }
 
     fun signOut() {
         repository.signOut()
+        repository.clearCaptionHistory()
+        repository.clearTranscriptionHistory()
+        loadHistory()
         deleteCurrentUser()
     }
 

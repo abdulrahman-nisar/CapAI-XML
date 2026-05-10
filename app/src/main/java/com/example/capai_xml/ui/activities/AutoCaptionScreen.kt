@@ -6,13 +6,27 @@ import android.widget.ImageView
 import android.widget.MediaController
 import android.widget.TextView
 import android.widget.VideoView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.capai_xml.R
+import com.google.android.material.button.MaterialButton
 
 class AutoCaptionScreen : AppCompatActivity() {
+    private val editCaptionLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode != RESULT_OK) {
+            return@registerForActivityResult
+        }
+        val updated = result.data?.getStringExtra("edited_caption")?.trim().orEmpty()
+        if (updated.isNotBlank()) {
+            findViewById<TextView>(R.id.tvAutoCaptionText).text = updated
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,6 +41,7 @@ class AutoCaptionScreen : AppCompatActivity() {
         val saveButtonImage = findViewById<ImageView>(R.id.ivSave)
         val videoView = findViewById<VideoView>(R.id.autoCaptionVideoView)
         val captionTextView = findViewById<TextView>(R.id.tvAutoCaptionText)
+        val editCaptionButton = findViewById<MaterialButton>(R.id.btnEditCaption)
         val uri = intent.getStringExtra("videoUri")
         val transcriptionText = intent.getStringExtra("transcriptionText")
         captionTextView.text = transcriptionText?.takeIf { it.isNotBlank() }
@@ -36,6 +51,15 @@ class AutoCaptionScreen : AppCompatActivity() {
         mediaController.setAnchorView(videoView)
         videoView.setMediaController(mediaController)
         videoView.start()
+
+        editCaptionButton.setOnClickListener {
+            val editIntent = Intent(this, EditCaptionScreen::class.java).apply {
+                putExtra("videoUri", uri)
+                putExtra("caption_text", captionTextView.text?.toString().orEmpty())
+                putExtra("transcriptionText", transcriptionText)
+            }
+            editCaptionLauncher.launch(editIntent)
+        }
 
 
         backButtonImage.setOnClickListener {

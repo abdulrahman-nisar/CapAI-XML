@@ -190,6 +190,14 @@ public class CapAiDataBaseImpl extends SQLiteOpenHelper implements CapAiDataBase
     }
 
     @Override
+    public boolean clearTranscriptionHistory() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsDeleted = db.delete(TABLE_TRANSCRIPTION_ITEM, null, null);
+        db.close();
+        return rowsDeleted > 0;
+    }
+
+    @Override
     public @NotNull List<@NotNull CaptionItem> getAllCaptionHistory() {
         List<CaptionItem> captionList = new java.util.ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();

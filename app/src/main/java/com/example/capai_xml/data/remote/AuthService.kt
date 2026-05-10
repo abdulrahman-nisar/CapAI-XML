@@ -9,6 +9,8 @@ import com.google.firebase.auth.auth
 class AuthService {
     val auth = Firebase.auth
 
+    fun currentUserId(): String? = auth.currentUser?.uid
+
     fun signUpWithEmailAndPassword(email: String, password: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task: Task<AuthResult> ->

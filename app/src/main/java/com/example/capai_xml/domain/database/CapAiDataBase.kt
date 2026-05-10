@@ -16,4 +16,5 @@ interface CapAiDataBase {
     fun getAllCaptionHistory() : List<CaptionItem>
     fun getAllTranscriptionHistory() : List<TranscriptionItem>
     fun clearCaptionHistory() : Boolean
+    fun clearTranscriptionHistory() : Boolean
 }

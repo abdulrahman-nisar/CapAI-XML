@@ -6,6 +6,9 @@ import com.example.capai_xml.data.dto.TranscriptionInitiationResponse
 import com.example.capai_xml.data.dto.UploadVideoResponse
 import com.example.capai_xml.data.local.database.CapAiDataBaseImpl
 import com.example.capai_xml.data.remote.AuthService
+import com.example.capai_xml.data.remote.FirebaseCaptionItem
+import com.example.capai_xml.data.remote.FirebaseHistoryService
+import com.example.capai_xml.data.remote.FirebaseTranscriptionItem
 import com.example.capai_xml.data.remote.GeminiCaptionGeneration
 import com.example.capai_xml.data.remote.RetrofitInstance
 import com.example.capai_xml.domain.database.CapAiDataBase
@@ -22,7 +25,8 @@ class CapAiRepositoryImpl(
     context : Context? = null,
     private val capAiDataBase: CapAiDataBase = CapAiDataBaseImpl(context, "cap_ai_db", null,1),
     private val authService: AuthService = AuthService(),
-    private val geminiCaptionGenerator : GeminiCaptionGeneration = GeminiCaptionGeneration()
+    private val geminiCaptionGenerator : GeminiCaptionGeneration = GeminiCaptionGeneration(),
+    private val historyService: FirebaseHistoryService = FirebaseHistoryService()
 ) : CapAiRepository{
     override fun addUser(user: User) {
        capAiDataBase.addUser(user)
@@ -38,6 +42,9 @@ class CapAiRepositoryImpl(
 
     override fun addCaptionToHistory(captionItem: CaptionItem) {
         capAiDataBase.addCaptionToHistory(captionItem)
+        authService.currentUserId()?.let { uid ->
+            historyService.pushCaption(uid, FirebaseCaptionItem.fromDomain(captionItem))
+        }
     }
 
     override fun deleteCaptionFromHistory(captionItem: CaptionItem): Boolean {
@@ -46,6 +53,9 @@ class CapAiRepositoryImpl(
 
     override fun addTranscriptionToHistory(transcriptionItem: TranscriptionItem) {
         capAiDataBase.addTranscriptionToHistory(transcriptionItem)
+        authService.currentUserId()?.let { uid ->
+            historyService.pushTranscription(uid, FirebaseTranscriptionItem.fromDomain(transcriptionItem))
+        }
     }
 
     override fun deleteTranscriptionFromHistory(transcriptionItem: TranscriptionItem): Boolean {
@@ -62,6 +72,28 @@ class CapAiRepositoryImpl(
 
     override fun clearCaptionHistory() {
         capAiDataBase.clearCaptionHistory()
+    }
+
+    override fun clearTranscriptionHistory() {
+        capAiDataBase.clearTranscriptionHistory()
+    }
+
+    override fun syncHistoryForCurrentUser(onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
+        val uid = authService.currentUserId()
+        if (uid.isNullOrBlank()) {
+            capAiDataBase.clearCaptionHistory()
+            capAiDataBase.clearTranscriptionHistory()
+            onSuccess()
+            return
+        }
+
+        historyService.fetchHistory(uid, { bundle ->
+            capAiDataBase.clearCaptionHistory()
+            capAiDataBase.clearTranscriptionHistory()
+            bundle.captions.forEach { capAiDataBase.addCaptionToHistory(it.toDomain()) }
+            bundle.transcriptions.forEach { capAiDataBase.addTranscriptionToHistory(it.toDomain()) }
+            onSuccess()
+        }, onFailure)
     }
 
     override fun signUpWithEmailAndPassword(

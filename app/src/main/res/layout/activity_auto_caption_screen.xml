@@ -70,7 +70,6 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <!--
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEditCaption"
         style="@style/Widget.Material3.Button.OutlinedButton"
@@ -91,7 +90,6 @@
         app:iconTint="@color/white"
         app:iconGravity="textStart"
         app:iconPadding="8dp" />
-    -->
 
     <TextView
         android:id="@+id/tvAutoCaptionText"
